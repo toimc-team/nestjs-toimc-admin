@@ -1,0 +1,26 @@
+version: '3'
+services:
+  dev-db:
+    image: postgres:14
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: long-random-password
+      POSTGRES_DB: nestdb
+    networks:
+      - toimc
+
+  test-db:
+    image: postgres:14
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: long-random-password
+      POSTGRES_DB: nestdb
+    networks:
+      - toimc
+
+networks:
+  toimc:
