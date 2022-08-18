@@ -44,15 +44,18 @@
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.8",
+    "@nestjs/swagger": "^6.0.5",
     "@prisma/client": "^4.1.1",
     "argon2": "^0.28.7",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "config": "^3.3.7",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.5.6"
+    "rxjs": "^7.5.6",
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
