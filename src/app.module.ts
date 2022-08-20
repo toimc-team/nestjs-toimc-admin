@@ -3,8 +3,9 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
-import { OrdersModule } from './orders/orders.module';
-import { ArticlesModule } from './articles/articles.module';
+import { OrdersModule } from './module/admin/orders/orders.module';
+import { ArticlesModule } from './module/admin/articles/articles.module';
+import { FocusModule } from './module/admin/focus/focus.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ArticlesModule } from './articles/articles.module';
     PrismaModule,
     OrdersModule,
     ArticlesModule,
+    FocusModule,
   ],
 })
 export class AppModule {}
