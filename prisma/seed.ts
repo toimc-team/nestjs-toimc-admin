@@ -7,6 +7,8 @@ import { PrismaClient } from '@prisma/client';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
+// npx prisma migrate dev --name "init"
+
 // 启动脚本执行main函数操作数据库添加数据
 // npx prisma db seed
 
@@ -34,31 +36,31 @@ async function main() {
   //     published: true,
   //   },
   // });
-  // const post1 = await prisma.focus.upsert({
-  //   where: { title: '轮播图' },
-  //   update: {},
-  //   create: {
-  //     title: '轮播图',
-  //     link: '123123 ',
-  //     content: '131313',
-  //     status: 1,
-  //     type: 2,
-  //     focus_img: '12313',
-  //   },
-  // });
-  // const post2 = await prisma.focus.upsert({
-  //   where: { title: '轮播图1' },
-  //   update: {},
-  //   create: {
-  //     title: '轮播图1',
-  //     link: '123123 ',
-  //     content: '131313',
-  //     status: 0,
-  //     type: 1,
-  //     focus_img: '12313',
-  //   },
-  // });
-  // console.log({ post1, post2 });
+  const post1 = await prisma.focus.upsert({
+    where: { title: '轮播图' },
+    update: {},
+    create: {
+      title: '轮播图',
+      link: '123123 ',
+      content: '131313',
+      status: 1,
+      type: 2,
+      focus_img: '12313',
+    },
+  });
+  const post2 = await prisma.focus.upsert({
+    where: { title: '轮播图1' },
+    update: {},
+    create: {
+      title: '轮播图1',
+      link: '123123 ',
+      content: '131313',
+      status: 0,
+      type: 1,
+      focus_img: '12313',
+    },
+  });
+  console.log({ post1, post2 });
 }
 
 // execute the main function

@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Response,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -26,16 +25,11 @@ export class FocusController {
   @Post()
   @ApiCreatedResponse({ type: FocusEntity })
   @UseInterceptors(FileInterceptor('focus_img'))
-  async create(
-    @Body() createFocusDto: CreateFocusDto,
-    @UploadedFile() file,
-    @Response() res,
-  ) {
+  create(@Body() dto: CreateFocusDto, @UploadedFile() file) {
+    console.log(dto);
     const saveDir = uploadFile(file);
-    await this.focusService.create(
-      Object.assign(createFocusDto, { focus_img: saveDir }),
-    );
-    return res;
+
+    return this.focusService.create(Object.assign(dto, { focus_img: saveDir }));
   }
 
   @Get()
@@ -53,18 +47,17 @@ export class FocusController {
   @Patch(':id')
   @ApiOkResponse({ type: FocusEntity })
   @UseInterceptors(FileInterceptor('focus_img'))
-  async update(
+  update(
     @Param('id') id: string,
     @Body() updateFocusDto: UpdateFocusDto,
     @UploadedFile() file,
-    @Response() res,
   ) {
     const saveDir = uploadFile(file);
-    await this.focusService.update(
+
+    return this.focusService.update(
       +id,
       Object.assign(updateFocusDto, { focus_img: saveDir }),
     );
-    return res;
   }
 
   @Delete(':id')
