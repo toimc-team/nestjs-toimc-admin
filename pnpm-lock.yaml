@@ -22,7 +22,6 @@ specifiers:
   argon2: ^0.28.7
   class-transformer: ^0.5.1
   class-validator: ^0.13.2
-  config: ^3.3.7
   dotenv-cli: ^6.0.0
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
@@ -59,7 +58,6 @@ dependencies:
   argon2: 0.28.7
   class-transformer: 0.5.1
   class-validator: 0.13.2
-  config: 3.3.7
   mkdirp: 1.0.4
   passport: 0.6.0
   passport-jwt: 4.0.0
@@ -2149,13 +2147,6 @@ packages:
       readable-stream: 2.3.7
       typedarray: 0.0.6
 
-  /config/3.3.7:
-    resolution: {integrity: sha512-mX/n7GKDYZMqvvkY6e6oBY49W8wxdmQt+ho/5lhwFDXqQW9gI+Ahp8EKp8VAbISPnmf2+Bv5uZK7lKXZ6pf1aA==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      json5: 2.2.1
-    dev: false
-
   /consola/2.15.3:
     resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
 
@@ -3727,6 +3718,7 @@ packages:
     resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==}
     engines: {node: '>=6'}
     hasBin: true
+    dev: true
 
   /jsonc-parser/3.0.0:
     resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
