@@ -1,7 +1,7 @@
 import { createWriteStream } from 'fs';
 import * as mkdirp from 'mkdirp';
 import { extname, join } from 'path';
-import { format } from 'silly-datetime';
+import * as dayjs from 'dayjs';
 import { UPLOADDIR } from '../constants';
 
 /**
@@ -9,7 +9,7 @@ import { UPLOADDIR } from '../constants';
  */
 export const uploadFile = (file) => {
   // 1.获取当前日期
-  const date = format(new Date(), 'YYYYMMDD');
+  const date = dayjs().format('YYYYMMDD');
   const d = getTime();
   // 2.根据日期创建目录
   const dir = join(__dirname, '..', `../../public/${UPLOADDIR}`, date);
