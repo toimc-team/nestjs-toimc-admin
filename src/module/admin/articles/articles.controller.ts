@@ -21,6 +21,7 @@ export class ArticlesController {
   @Post()
   @ApiCreatedResponse({ type: ArticleEntity })
   create(@Body() createArticleDto: CreateArticleDto) {
+    console.log(createArticleDto);
     return this.articlesService.create(createArticleDto);
   }
   @Get('drafts')

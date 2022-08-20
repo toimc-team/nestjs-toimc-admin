@@ -78,3 +78,17 @@ model Orders {
   createdAt               DateTime @default(now()) //提交时间
   updatedAt               DateTime @updatedAt // 更新时间
 }
+
+// 广告轮播
+model Focus {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @unique
+  content   String?
+  type      Int?     @default(0)
+  focus_img String?
+  link      String?
+  sort      Int?
+  status    Int?     @default(0)
+}

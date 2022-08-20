@@ -35,7 +35,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "pretest:e2e": "npm run db:restart:test",
     "test:e2e": "dotenv -e ./env.test -- jest --watch --no-cache --config ./test/jest-e2e.json",
-    "preinstall": "prisma generate"
+    "preinstall": "prisma generate",
+    "seed": "npx prisma db seed"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.8",
@@ -50,11 +51,13 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "config": "^3.3.7",
+    "mkdirp": "^1.0.4",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.6",
+    "silly-datetime": "^0.1.2",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
