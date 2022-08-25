@@ -15,12 +15,38 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String @unique
+  email String  @unique
   hash  String
+  name  String?
 
-  name String?
+  roles UserOnRole[]
 
   @@map("users")
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  users UserOnRole[]
+
+  @@map("roles")
+}
+
+model UserOnRole {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User @relation(fields: [userId], references: [id])
+  role   Role @relation(fields: [roleId], references: [id])
+  userId Int  @map("userId")
+  roleId Int  @map("roleId")
+
+  @@map("user_on_role")
 }
 
 model Article {
@@ -31,6 +57,8 @@ model Article {
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("articles")
 }
 
 // 订单
@@ -77,6 +105,8 @@ model Orders {
   comment_time            DateTime //评价时间
   createdAt               DateTime @default(now()) //提交时间
   updatedAt               DateTime @updatedAt // 更新时间
+
+  @@map("orders")
 }
 
 // 广告轮播
@@ -91,4 +121,6 @@ model Focus {
   link      String?
   sort      Int?
   status    Int?     @default(0)
+
+  @@map("focus")
 }
