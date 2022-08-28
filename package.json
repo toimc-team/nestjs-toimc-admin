@@ -36,7 +36,8 @@
     "pretest:e2e": "npm run db:restart:test",
     "test:e2e": "dotenv -e ./env.test -- jest --watch --no-cache --config ./test/jest-e2e.json",
     "preinstall": "prisma generate",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma db seed",
+    "log": "standard-version --release"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.8",
@@ -79,6 +80,7 @@
     "prettier": "^2.7.1",
     "prisma": "^4.1.1",
     "source-map-support": "^0.5.21",
+    "standard-version": "^9.5.0",
     "supertest": "^6.2.4",
     "ts-jest": "28.0.7",
     "ts-loader": "^9.3.1",
