@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateArticleDto {
@@ -6,7 +6,7 @@ export class CreateArticleDto {
   @IsNotEmpty()
   title: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsNotEmpty()
   description?: string;
 

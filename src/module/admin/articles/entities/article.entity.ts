@@ -1,6 +1,6 @@
 // src/articles/entities/article.entity.ts
 
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Article } from '@prisma/client';
 
 export class ArticleEntity implements Article {
@@ -10,7 +10,7 @@ export class ArticleEntity implements Article {
   @ApiProperty()
   title: string;
 
-  @ApiProperty({ required: false, nullable: true })
+  @ApiPropertyOptional({ required: false, nullable: true })
   description: string | null;
 
   @ApiProperty()

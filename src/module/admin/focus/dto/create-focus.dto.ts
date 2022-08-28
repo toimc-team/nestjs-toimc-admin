@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateFocusDto {
@@ -6,7 +6,7 @@ export class CreateFocusDto {
   @IsNotEmpty()
   title: string;
 
-  @ApiProperty({ required: false, default: '' })
+  @ApiPropertyOptional({ required: false, default: '' })
   @IsNotEmpty()
   link?: string;
 
@@ -14,18 +14,18 @@ export class CreateFocusDto {
   @IsNotEmpty()
   content: string;
 
-  @ApiProperty({ required: false, default: '' })
+  @ApiPropertyOptional({ required: false, default: '' })
   focus_img?: string;
 
-  @ApiProperty({ required: false, default: 0 })
+  @ApiPropertyOptional({ required: false, default: 0 })
   @IsNotEmpty()
   type?: number;
 
-  @ApiProperty({ required: false, default: 0 })
+  @ApiPropertyOptional({ required: false, default: 0 })
   @IsNotEmpty()
   status?: number;
 
-  @ApiProperty({ required: false, default: 0 })
+  @ApiPropertyOptional({ required: false, default: 0 })
   @IsNotEmpty()
   sort?: number;
 }
