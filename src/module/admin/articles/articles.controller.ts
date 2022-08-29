@@ -19,7 +19,6 @@ import { RbacInterceptor } from '@/interceptor';
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
-  @UseInterceptors(new RbacInterceptor(3))
   @Post()
   @ApiCreatedResponse({ type: ArticleEntity })
   create(@Body() dto: CreateArticleDto) {

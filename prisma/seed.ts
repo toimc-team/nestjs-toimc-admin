@@ -12,8 +12,8 @@ const prisma = new PrismaClient();
 async function main() {
   const role = await prisma.role.create({
     data: {
-      name: 'admin',
-      key: 'admin',
+      name: '超级管理员',
+      key: 'super_admin',
     },
   });
 

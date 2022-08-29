@@ -25,7 +25,7 @@ export class UserController {
   //   return req.user;
   // }
 
-  @UseInterceptors(new RbacInterceptor(1))
+  @UseInterceptors(new RbacInterceptor(['super_admin', 'admin']))
   @Get('/info')
   getUserInfo(@GetUser() user: User) {
     return user;
