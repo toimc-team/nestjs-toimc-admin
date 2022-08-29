@@ -6,18 +6,20 @@ import {
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { ArticleEntity } from './entities/article.entity';
-
+import { RbacInterceptor } from '@/interceptor';
 @Controller('articles')
 @ApiTags('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
+  @UseInterceptors(new RbacInterceptor(3))
   @Post()
   @ApiCreatedResponse({ type: ArticleEntity })
   create(@Body() dto: CreateArticleDto) {

@@ -1,9 +1,6 @@
-// prisma/seed.ts
-
-// prisma/seed.ts
-
+// https://www.prisma.io/docs/guides/database/seed-database
 import { PrismaClient } from '@prisma/client';
-
+import * as argon2 from 'argon2';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
@@ -13,6 +10,29 @@ const prisma = new PrismaClient();
 // npx prisma db seed
 
 async function main() {
+  const role = await prisma.role.create({
+    data: {
+      name: 'admin',
+      key: 'admin',
+    },
+  });
+
+  const user = await prisma.user.create({
+    data: {
+      name: 'admin',
+      email: 'test@admin.com',
+      hash: await argon2.hash('admin'),
+    },
+  });
+
+  const userRole = await prisma.userOnRole.create({
+    data: {
+      roleId: role.id,
+      userId: user.id,
+    },
+  });
+
+  console.log('seed success');
   // create two dummy articles
   // const post1 = await prisma.article.upsert({
   //   where: { title: 'Prisma Adds Support for MongoDB' },
@@ -36,31 +56,31 @@ async function main() {
   //     published: true,
   //   },
   // });
-  const post1 = await prisma.focus.upsert({
-    where: { title: '轮播图' },
-    update: {},
-    create: {
-      title: '轮播图',
-      link: '123123 ',
-      content: '131313',
-      status: 1,
-      type: 2,
-      focus_img: '12313',
-    },
-  });
-  const post2 = await prisma.focus.upsert({
-    where: { title: '轮播图1' },
-    update: {},
-    create: {
-      title: '轮播图1',
-      link: '123123 ',
-      content: '131313',
-      status: 0,
-      type: 1,
-      focus_img: '12313',
-    },
-  });
-  console.log({ post1, post2 });
+  // const post1 = await prisma.focus.upsert({
+  //   where: { title: '轮播图' },
+  //   update: {},
+  //   create: {
+  //     title: '轮播图',
+  //     link: '123123 ',
+  //     content: '131313',
+  //     status: 1,
+  //     type: 2,
+  //     focus_img: '12313',
+  //   },
+  // });
+  // const post2 = await prisma.focus.upsert({
+  //   where: { title: '轮播图1' },
+  //   update: {},
+  //   create: {
+  //     title: '轮播图1',
+  //     link: '123123 ',
+  //     content: '131313',
+  //     status: 0,
+  //     type: 1,
+  //     focus_img: '12313',
+  //   },
+  // });
+  // console.log({ post1, post2 });
 }
 
 // execute the main function

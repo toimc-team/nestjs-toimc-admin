@@ -47,6 +47,7 @@ export class AuthService {
   }
 
   async signin(dto: AuthDto) {
+    // TODO: 查询角色
     const user = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
@@ -65,10 +66,12 @@ export class AuthService {
   async signToken(
     userId: number,
     email: string,
+    roles?: string[],
   ): Promise<{ access_token: string }> {
     const payload = {
       sub: userId,
       email,
+      roles,
     };
 
     const secret = this.config.get('JWT_SECRET');

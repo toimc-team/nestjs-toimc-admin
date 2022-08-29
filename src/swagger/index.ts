@@ -10,5 +10,7 @@ export const setupSwagger = (app: NestExpressApplication) => {
     .addTag('beta')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
+
+  // swagger url http://localhost:3000/docs
   SwaggerModule.setup('docs', app, document);
 };

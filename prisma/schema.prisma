@@ -1,6 +1,13 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Prisma 模型命名规则 https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#naming-conventions
+// 1. 命名需要符合以下正则表达式：[A-Za-z][A-Za-z0-9_]*
+// 2. 以字母开头，遵循帕斯卡命名法（Pascal Case）
+// 3. 模型命名用单数而不是复数，例如 User，而不是 users
+// 4. 避开保留字，https://github.com/prisma/prisma/blob/main/packages/client/src/generation/generateClient.ts#L376
+// 5. 自定义表名使用@@map，通常为蛇形命名（snake_case）
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,7 +26,7 @@ model User {
   hash  String
   name  String?
 
-  roles UserOnRole[]
+  UserOnRole UserOnRole[]
 
   @@map("users")
 }
@@ -29,9 +36,13 @@ model Role {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  key  String @unique //角色标识，admin,user,visitor等
   name String
 
-  users UserOnRole[]
+  users       UserOnRole[]
+  permissions Permission[]
+
+  RoleOnPermisson RoleOnPermisson[]
 
   @@map("roles")
 }
@@ -49,6 +60,37 @@ model UserOnRole {
   @@map("user_on_role")
 }
 
+model Permission {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key             String            @unique //角色标识，admin,user,visitor等
+  name            String
+  type            String            @default("menu") //权限类型 为menu或者button
+  path            String? //路径
+  method          String? //请求方法
+  Role            Role?             @relation(fields: [roleId], references: [id])
+  roleId          Int?
+  RoleOnPermisson RoleOnPermisson[]
+
+  @@map("permissions")
+}
+
+model RoleOnPermisson {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role       Role       @relation(fields: [roleId], references: [id])
+  permission Permission @relation(fields: [permissionId], references: [id])
+
+  roleId       Int @map("roleId")
+  permissionId Int @map("permissionId")
+
+  @@map("role_on_permission")
+}
+
 model Article {
   id          Int      @id @default(autoincrement())
   title       String   @unique
@@ -62,7 +104,7 @@ model Article {
 }
 
 // 订单
-model Orders {
+model Order {
   id                      Int      @id @default(autoincrement())
   member_id               Int //会员id
   coupon_id               Int //优惠卷id
