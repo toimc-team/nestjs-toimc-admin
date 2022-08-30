@@ -32,7 +32,6 @@ async function main() {
     },
   });
 
-  console.log('seed success');
   // create two dummy articles
   // const post1 = await prisma.article.upsert({
   //   where: { title: 'Prisma Adds Support for MongoDB' },
@@ -56,31 +55,32 @@ async function main() {
   //     published: true,
   //   },
   // });
-  // const post1 = await prisma.focus.upsert({
-  //   where: { title: '轮播图' },
-  //   update: {},
-  //   create: {
-  //     title: '轮播图',
-  //     link: '123123 ',
-  //     content: '131313',
-  //     status: 1,
-  //     type: 2,
-  //     focus_img: '12313',
-  //   },
-  // });
-  // const post2 = await prisma.focus.upsert({
-  //   where: { title: '轮播图1' },
-  //   update: {},
-  //   create: {
-  //     title: '轮播图1',
-  //     link: '123123 ',
-  //     content: '131313',
-  //     status: 0,
-  //     type: 1,
-  //     focus_img: '12313',
-  //   },
-  // });
-  // console.log({ post1, post2 });
+  const post1 = await prisma.focus.upsert({
+    where: { title: '轮播图' },
+    update: {},
+    create: {
+      title: '轮播图',
+      link: '123123 ',
+      content: '131313',
+      status: 1,
+      type: 2,
+      focus_img: '12313',
+    },
+  });
+  const post2 = await prisma.focus.upsert({
+    where: { title: '轮播图1' },
+    update: {},
+    create: {
+      title: '轮播图1',
+      link: '123123 ',
+      content: '131313',
+      status: 0,
+      type: 1,
+      focus_img: '12313',
+    },
+  });
+  console.log({ post1, post2 });
+  console.log('seed success');
 }
 
 // execute the main function
