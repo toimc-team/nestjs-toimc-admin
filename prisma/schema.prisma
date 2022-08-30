@@ -39,8 +39,7 @@ model Role {
   key  String @unique //角色标识，admin,user,visitor等
   name String
 
-  users       UserOnRole[]
-  permissions Permission[]
+  users UserOnRole[]
 
   RoleOnPermisson RoleOnPermisson[]
 
@@ -65,13 +64,12 @@ model Permission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  key             String            @unique //角色标识，admin,user,visitor等
-  name            String
-  type            String            @default("menu") //权限类型 为menu或者button
-  path            String? //路径
-  method          String? //请求方法
-  Role            Role?             @relation(fields: [roleId], references: [id])
-  roleId          Int?
+  key    String  @unique //角色标识，admin,user,visitor等
+  name   String
+  type   String  @default("menu") //权限类型 为menu或者button
+  path   String? //路径
+  method String? //请求方法
+
   RoleOnPermisson RoleOnPermisson[]
 
   @@map("permissions")
