@@ -1,10 +1,18 @@
-import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard/jwt.guard';
 import { EditUserDto } from './dto/edit-user.dto';
 import { UserService } from './user.service';
+import { RbacInterceptor } from '@/interceptor';
 
 @UseGuards(JwtGuard)
 @Controller('users')
@@ -17,6 +25,7 @@ export class UserController {
   //   return req.user;
   // }
 
+  @UseInterceptors(new RbacInterceptor(['super_admin', 'admin']))
   @Get('/info')
   getUserInfo(@GetUser() user: User) {
     return user;

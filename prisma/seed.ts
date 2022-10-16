@@ -1,9 +1,6 @@
-// prisma/seed.ts
-
-// prisma/seed.ts
-
+// https://www.prisma.io/docs/guides/database/seed-database
 import { PrismaClient } from '@prisma/client';
-
+import * as argon2 from 'argon2';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
@@ -13,6 +10,28 @@ const prisma = new PrismaClient();
 // npx prisma db seed
 
 async function main() {
+  const role = await prisma.role.create({
+    data: {
+      name: '超级管理员',
+      key: 'super_admin',
+    },
+  });
+
+  const user = await prisma.user.create({
+    data: {
+      name: 'admin',
+      email: 'test@admin.com',
+      hash: await argon2.hash('admin'),
+    },
+  });
+
+  const userRole = await prisma.userOnRole.create({
+    data: {
+      roleId: role.id,
+      userId: user.id,
+    },
+  });
+
   // create two dummy articles
   // const post1 = await prisma.article.upsert({
   //   where: { title: 'Prisma Adds Support for MongoDB' },
@@ -61,6 +80,7 @@ async function main() {
     },
   });
   console.log({ post1, post2 });
+  console.log('seed success');
 }
 
 // execute the main function

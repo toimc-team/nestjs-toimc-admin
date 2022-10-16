@@ -52,6 +52,7 @@ export class AuthService {
         email: dto.email,
       },
     });
+
     if (!user) throw new ForbiddenException('用户不存在或者密码错误');
 
     const pwMatched = await argon.verify(user.hash, dto.password);
